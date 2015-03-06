@@ -64,9 +64,9 @@ class TimeEntry < AbstractActiveModel
   end
   
   # Use post to add a time entry
-  def self.add_to_issue(issue_id, hours_spent, comments, activity_id=35)
+  def self.add_to_issue(issue_id, hours_spent, comments)
       response = post("/time_entries.json",
-        :body=>{"issue_id"=>issue_id,:hours=>hours_spent,"comments"=>comments,"activity_id"=>activity_id.to_s}.to_json,        
+        :body=>{:time_entry=>{"issue_id"=>issue_id,:hours=>hours_spent,"comments"=>comments}}.to_json,        
             :headers => { 'Content-Type' => 'application/json' })
         
       puts response.inspect
